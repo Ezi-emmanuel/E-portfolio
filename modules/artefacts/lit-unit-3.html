@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <meta
       name="description"
-      content="Unit 3 — Launch into Computing — Eziuche Emmanuel, MSc Artificial Intelligence, University of Essex."
+      content="Unit 3 — Algorithm analysis and implementation (Bubble Sort) — Eziuche Emmanuel, MSc Artificial Intelligence, University of Essex."
     />
     <link rel="stylesheet" href="../../assets/css/main.css" />
     <link rel="stylesheet" href="../../assets/css/portfolio.css" />
@@ -38,15 +38,186 @@
               Module: <a href="../launch-into-computing.html">Launch into Computing</a>
             </p>
 
-            <h2>[Unit 3 activity title — replace with your task heading]</h2>
+            <h2>Algorithm Analysis and Implementation</h2>
+            <p><em>(Bubble Sort Algorithm in the Python programming language)</em></p>
 
-            <p>by <strong>Eziuche Emmanuel</strong> - [date and time]</p>
+            <p>by <strong>Eziuche Emmanuel</strong></p>
 
-            <p>[Your Unit 3 submission — paste your write-up here.]</p>
+            <p>
+              Bubble Sort is a comparison-based sorting algorithm that organizes a list by repeatedly evaluating and
+              swapping adjacent elements that are out of order until the entire sequence is correctly positioned (Cormen
+              et al., 2022).
+            </p>
 
-            <h3>Peer feedback</h3>
-            <p>by <strong>[Peer name]</strong> - [date and time]</p>
-            <p>[Peer feedback — paste here when you have it.]</p>
+            <h3>Code</h3>
+            <pre class="code-block"><code>def bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        # After each pass, the largest element "bubbles" to the end
+        for j in range(0, n - i - 1):
+            if arr[j] &gt; arr[j + 1]:
+                # swap
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+    return arr</code></pre>
+
+            <h3>Time complexity analysis</h3>
+            <p>
+              An algorithm's time complexity dictates how its computational execution time grows relative to an
+              increasing input size, denoted as <em>n</em> (Goodrich, Tamassia and Goldwasser, 2013). While Bubble Sort
+              is one of the most conceptually straightforward sorting mechanisms, it represents one of the least
+              computationally efficient designs (Cormen et al., 2022). Its performance profiles are classified as
+              follows:
+            </p>
+            <ul>
+              <li>
+                <strong>Worst-Case Complexity: O(n²)</strong> — This occurs when the input array is sorted in exact
+                reverse order. The algorithm is forced to execute a comparison and a swap for every individual pair,
+                yielding an n × n operational overhead (Cormen et al., 2022).
+              </li>
+              <li>
+                <strong>Average-Case Complexity: O(n²)</strong> — For randomized data distributions, the expected number
+                of comparisons and internal shifts remains inherently quadratic (Goodrich, Tamassia and Goldwasser,
+                2013).
+              </li>
+              <li>
+                <strong>Best-Case Complexity: O(n)</strong> — If optimized with an internal boolean flag to monitor swap
+                activity, the algorithm can terminate after a single verification pass if the dataset is pre-sorted.
+              </li>
+              <li>
+                <strong>Space Complexity: O(1)</strong> — Bubble Sort is strictly an &quot;in-place&quot; algorithm,
+                requiring a constant, fixed amount of auxiliary memory space regardless of the dataset's scale.
+              </li>
+            </ul>
+
+            <h3>A graph showing performance (time complexity) for different input sizes</h3>
+            <p>
+              The empirical performance graph visualizes a clear quadratic growth trajectory; as the input size (n) scales
+              upward, execution time accelerates rapidly along a parabolic curve. For instance, when the underlying
+              dataset expands from 200 elements to 1,000 elements, the measured execution time rises disproportionately
+              from approximately 0.005 seconds to over 0.116 seconds. This behavior highlights the operational toll of
+              the nested loops effect. Because every individual element must be exhaustively compared against its
+              neighbors through overlapping iterations, the computational workload scales quadratically, demonstrating
+              why Bubble Sort is fundamentally unsuited for large-scale data applications.
+            </p>
+
+            <h3>Analysis report</h3>
+
+            <h4>Bubble Sort algorithm's functionality</h4>
+            <p>
+              The Bubble Sort algorithm is a fundamental, comparison-based sorting technique that structures disordered
+              data through sequential iteration. It operates by systematically stepping through an array, comparing
+              adjacent data pairs, and swapping their positions if they violate the intended order. This basic procedure
+              is executed across multiple cumulative passes until a full iteration occurs with zero adjustments, causing
+              the largest unsorted values to incrementally bubble up to their final, stable terminal positions (Cormen et
+              al., 2022).
+            </p>
+
+            <h4>Efficiency for small vs. large datasets</h4>
+            <p>
+              The real-world utility of Bubble Sort is bounded entirely by dataset scale, an operational reality governed
+              by its quadratic O(n²) time complexity (Goodrich, Tamassia and Goldwasser, 2013). For small datasets such
+              as indexing a brief inventory of specialized surgical tools or organizing a localized cohort of on-duty
+              theatre staff, the processing latency is minimal and measured in microseconds, making its algorithmic
+              inefficiency virtually unnoticeable. However, when applied to expanding datasets, its performance collapses.
+              Due to its deeply nested looping architecture, doubling the input size quadruples the necessary execution
+              steps, rendering it entirely obsolete for handling large-scale arrays or live, continuous streams of data.
+            </p>
+
+            <h4>Comparison of Bubble Sort and Quick Sort and their real-world use cases</h4>
+            <p>
+              In contrast to the brute-force mechanics of Bubble Sort, Quicksort utilizes a highly advanced, recursive
+              &quot;divide-and-conquer&quot; framework (Cormen et al., 2022). By establishing a strategic pivot element
+              and partitioning the surrounding array into independent, lesser and greater sub-arrays, it bypasses
+              redundant comparisons to achieve an optimal average-case time complexity of O(n log n).
+            </p>
+
+            <h4>Code — Quick Sort</h4>
+            <pre class="code-block"><code>def quicksort(arr):
+    if len(arr) &lt;= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x &lt; pivot]
+    middle = [x for x in arr if x == pivot]
+    right = [x for x in arr if x &gt; pivot]
+    return quicksort(left) + middle + quicksort(right)</code></pre>
+
+            <p>
+              Within the domain of Artificial Intelligence in healthcare (specifically in my area of interest regarding
+              automated anaesthetics and patient surgical flow optimization) this dramatic performance variance is
+              intrinsically tied to system safety and clinical integrity. Quicksort delivers the predictable, logarithmic
+              scalability needed to manage multi-theatre scheduling configurations and instantaneous patient monitoring
+              systems without systemic lag. Ultimately, while Bubble Sort remains an important educational framework for
+              studying fundamental control structures and logical conditions, Quicksort represents the baseline
+              computational standard required to deliver reliable, responsive, and safe clinical AI applications (Walton,
+              2024).
+            </p>
+
+            <h4>Comparison table</h4>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">Feature</th>
+                    <th scope="col">Bubble Sort</th>
+                    <th scope="col">Quick Sort</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Time Complexity (Best)</td>
+                    <td>O(n)</td>
+                    <td>O(n log n)</td>
+                  </tr>
+                  <tr>
+                    <td>Time Complexity (Average)</td>
+                    <td>O(n²)</td>
+                    <td>O(n log n)</td>
+                  </tr>
+                  <tr>
+                    <td>Time Complexity (Worst)</td>
+                    <td>O(n²)</td>
+                    <td>O(n²) (rare with good pivot choice)</td>
+                  </tr>
+                  <tr>
+                    <td>Space Complexity</td>
+                    <td>O(1)</td>
+                    <td>O(log n) (due to recursion)</td>
+                  </tr>
+                  <tr>
+                    <td>Logic</td>
+                    <td>Simple, comparison-based</td>
+                    <td>Divide-and-conquer</td>
+                  </tr>
+                  <tr>
+                    <td>Practical Use</td>
+                    <td>Small or nearly sorted lists</td>
+                    <td>Large datasets, real-world sorting</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>References</h3>
+            <ul>
+              <li>
+                Cormen, T.H., Leiserson, C.E., Rivest, R.L. and Stein, C. (2022) <em>Introduction to Algorithms</em>. 4th
+                edn. Cambridge, MA: MIT Press. Available at:
+                <a href="https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/">https://mitpress.mit.edu/9780262046305/introduction-to-algorithms/</a>
+                (Accessed: 13 May 2026).
+              </li>
+              <li>
+                Goodrich, M.T., Tamassia, R. and Goldwasser, M.H. (2013) <em>Data Structures and Algorithms in Python</em>.
+                Hoboken, NJ: John Wiley &amp; Sons. Available at:
+                <a href="https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python-p-9781118290279">https://www.wiley.com/en-us/Data+Structures+and+Algorithms+in+Python-p-9781118290279</a>
+                (Accessed: 15 May 2026).
+              </li>
+              <li>
+                Walton, D.J. (2024) <em>Culturally Responsive Computing: An Introduction into Computer Science, Security, and Technology</em>.
+                Boston, MA: ROTEL. Available at:
+                <a href="https://rotel.pressbooks.pub/culturally-responsive-computing/">https://rotel.pressbooks.pub/culturally-responsive-computing/</a>
+                (Accessed: 18 May 2026).
+              </li>
+            </ul>
 
             <ul class="actions">
               <li><a href="../launch-into-computing.html#artefacts" class="button primary">Back to Launch into Computing</a></li>
