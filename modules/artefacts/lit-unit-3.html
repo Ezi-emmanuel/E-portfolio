@@ -89,7 +89,7 @@
               </li>
             </ul>
 
-            <figure class="circuit-diagram-figure">
+            <figure class="circuit-diagram-figure performance-graph-figure">
               <img
                 src="../../images/lit-unit-3-performance-graph.png"
                 alt="Line graph of Bubble Sort execution time in seconds versus input size n, showing quadratic growth from about 0.005s at n=200 to about 0.116s at n=1000."
@@ -99,45 +99,38 @@
                 <em>A Graph Showing Performance (Time Complexity) For Different Input Sizes,</em>
               </figcaption>
             </figure>
-            <p>
-              The empirical performance graph visualizes a clear quadratic growth trajectory; as the input size (n) scales
-              upward, execution time accelerates rapidly along a parabolic curve. For instance, when the underlying
-              dataset expands from 200 elements to 1,000 elements, the measured execution time rises disproportionately
-              from approximately 0.005 seconds to over 0.116 seconds. This behavior highlights the operational toll of
-              the nested loops effect. Because every individual element must be exhaustively compared against its
-              neighbors through overlapping iterations, the computational workload scales quadratically, demonstrating
-              why Bubble Sort is fundamentally unsuited for large-scale data applications.
+            <p class="performance-graph-analysis">
+              <em>The empirical performance graph visualizes a clear quadratic growth trajectory; as the input size (n) scales upward, execution time accelerates rapidly along a parabolic curve. For instance, when the underlying dataset expands from 200 elements to 1,000 elements, the measured execution time rises disproportionately from approximately 0.005 seconds to over 0.116 seconds. This behavior highlights the operational toll of the nested loops effect. Because every individual element must be exhaustively compared against its neighbors through overlapping iterations, the computational workload scales quadratically, demonstrating why Bubble Sort is fundamentally unsuited for large-scale data applications.</em>
             </p>
 
             <h3>Analysis report</h3>
 
-            <h4>Bubble Sort algorithm's functionality</h4>
             <p>
-              The Bubble Sort algorithm is a fundamental, comparison-based sorting technique that structures disordered
-              data through sequential iteration. It operates by systematically stepping through an array, comparing
-              adjacent data pairs, and swapping their positions if they violate the intended order. This basic procedure
-              is executed across multiple cumulative passes until a full iteration occurs with zero adjustments, causing
-              the largest unsorted values to incrementally bubble up to their final, stable terminal positions (Cormen et
-              al., 2022).
+              Bubble Sort algorithm's functionality: The Bubble Sort algorithm is a fundamental,
+              comparison-based sorting technique that structures disordered data through sequential iteration. It operates
+              by systematically stepping through an array, comparing adjacent data pairs, and swapping their positions if
+              they violate the intended order. This basic procedure is executed across multiple cumulative passes until a
+              full iteration occurs with zero adjustments, causing the largest unsorted values to incrementally bubble up
+              to their final, stable terminal positions (Cormen et al., 2022).
             </p>
 
-            <h4>Efficiency for small vs. large datasets</h4>
             <p>
-              The real-world utility of Bubble Sort is bounded entirely by dataset scale, an operational reality governed
-              by its quadratic O(n²) time complexity (Goodrich, Tamassia and Goldwasser, 2013). For small datasets such
-              as indexing a brief inventory of specialized surgical tools or organizing a localized cohort of on-duty
-              theatre staff, the processing latency is minimal and measured in microseconds, making its algorithmic
-              inefficiency virtually unnoticeable. However, when applied to expanding datasets, its performance collapses.
-              Due to its deeply nested looping architecture, doubling the input size quadruples the necessary execution
-              steps, rendering it entirely obsolete for handling large-scale arrays or live, continuous streams of data.
+              Efficiency for small vs. large datasets: The real-world utility of Bubble Sort is bounded entirely by dataset
+              scale, an operational reality governed by its quadratic O(n²) time complexity (Goodrich, Tamassia and
+              Goldwasser, 2013). For small datasets such as indexing a brief inventory of specialized surgical tools or
+              organizing a localized cohort of on-duty theatre staff, the processing latency is minimal and measured in
+              microseconds, making its algorithmic inefficiency virtually unnoticeable. However, when applied to expanding
+              datasets, its performance collapses. Due to its deeply nested looping architecture, doubling the input size
+              quadruples the necessary execution steps, rendering it entirely obsolete for handling large-scale arrays or
+              live, continuous streams of data.
             </p>
 
-            <h4>Comparison of Bubble Sort and Quick Sort and their real-world use cases</h4>
             <p>
-              In contrast to the brute-force mechanics of Bubble Sort, Quicksort utilizes a highly advanced, recursive
-              &quot;divide-and-conquer&quot; framework (Cormen et al., 2022). By establishing a strategic pivot element
-              and partitioning the surrounding array into independent, lesser and greater sub-arrays, it bypasses
-              redundant comparisons to achieve an optimal average-case time complexity of O(n log n).
+              Comparison of Bubble Sort and Quick Sort and their real-world use cases: In contrast to the brute-force
+              mechanics of Bubble Sort, Quicksort utilizes a highly advanced, recursive &quot;divide-and-conquer&quot;
+              framework (Cormen et al., 2022). By establishing a strategic pivot element and partitioning the surrounding
+              array into independent, lesser and greater sub-arrays, it bypasses redundant comparisons to achieve an
+              optimal average-case time complexity of O(n log n).
             </p>
 
             <p class="unit-code-label">code &lt;/&gt;</p>
