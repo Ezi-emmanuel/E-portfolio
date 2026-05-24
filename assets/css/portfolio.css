@@ -168,15 +168,40 @@ p.unit-code-label {
   font-style: italic;
 }
 
-/* Unit pages: separate multiple artefacts on one page */
-hr.unit-artefact-divider {
-  border: 0;
-  border-top: solid 5px rgba(155, 241, 255, 0.55);
-  margin: 4em auto 3em;
+/* Unit pages: artefact section titles — thick blue tildes before and after */
+#main h2.artefact-section-title {
+  text-align: center;
+  margin-top: 2.5em;
+  margin-bottom: 1.25em;
   max-width: 100%;
-  height: 0;
-  background: none;
-  opacity: 1;
+}
+
+#main h2.artefact-section-title:first-of-type {
+  margin-top: 0;
+}
+
+#main h2.artefact-section-title::before,
+#main h2.artefact-section-title::after {
+  content: "~";
+  color: #9bf1ff;
+  font-weight: 700;
+  font-size: 1.5em;
+  line-height: 1;
+  vertical-align: baseline;
+  opacity: 0.95;
+}
+
+#main h2.artefact-section-title::before {
+  margin-right: 0.4em;
+}
+
+#main h2.artefact-section-title::after {
+  margin-left: 0.4em;
+}
+
+#main h2.artefact-section-title + h3 {
+  margin-top: 0.5em;
+  text-align: center;
 }
 
 /* Module page: note under title — same visual cue as .portfolio-note, not italic */
