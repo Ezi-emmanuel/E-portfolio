@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--
+  Forty by HTML5 UP — html5up.net | CCA 3.0
+  Launch into Computing — Unit 6 detail — Eziuche Emmanuel.
+-->
+<html lang="en">
+  <head>
+    <title>Unit 6 — Launch into Computing | Eziuche Emmanuel</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta
+      name="description"
+      content="Unit 6 — Implementing and evaluating a simple AI model — Eziuche Emmanuel, MSc Artificial Intelligence, University of Essex."
+    />
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/portfolio.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+    />
+    <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+  </head>
+  <body class="is-preload">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="wrapper">
+      <header id="header">
+        <a href="../../index.html" class="logo"><strong>Eziuche Emmanuel</strong> <span>MSc in Artificial Intelligence at University of Essex</span></a>
+        <nav><a href="#menu">Menu</a></nav>
+      </header>
+
+      <nav id="menu">
+        <ul class="links" id="portfolio-menu-links"></ul>
+      </nav>
+
+      <div id="main" class="alt">
+        <section>
+          <div class="inner">
+            <header class="major">
+              <h1>Unit 6</h1>
+            </header>
+            <p class="portfolio-note">
+              Module: <a href="../launch-into-computing.html">Launch into Computing</a>
+            </p>
+
+            <h2 class="artefact-section-title">Implementing and Evaluating a Simple AI Model</h2>
+            <p><em>Predicting Workforce Upskilling Needs (Binary Classification)</em></p>
+            <p><em>Dataset: AI Impact on Jobs 2030 (Kaggle)</em></p>
+
+            <p>by <strong>Eziuche Emmanuel</strong></p>
+
+            <p class="unit-code-label">code &lt;/&gt;</p>
+            <pre class="code-block"><code class="language-python"># Predictive Model for Upskilling Needs
+# Dataset: AI_Impact_on_Jobs_2030.csv
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, precision_score, recall_score, classification_report
+
+# Load and prep dataset
+data = pd.read_csv('AI_Impact_on_Jobs_2030.csv')
+features = ['Years_Experience', 'AI_Replacement_Risk', 'Future_Demand_Score',
+            'Average_Salary_USD', 'Work_Hours_Per_Week']
+X = data[features]
+y = data['Upskilling_Needed'].map({'Yes': 1, 'No': 0})
+
+# Train/test validation split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Instantiate and fit random forest classifier
+clf = RandomForestClassifier(n_estimators=100, max_depth=5, random_state=42)
+clf.fit(X_train, y_train)
+
+# Model evaluation
+y_pred = clf.predict(X_test)
+acc = accuracy_score(y_test, y_pred)
+prec = precision_score(y_test, y_pred, zero_division=0)
+rec = recall_score(y_test, y_pred, zero_division=0)
+
+print(f"Model Accuracy: {acc:.4f}")
+print(f"Model Precision: {prec:.4f}")
+print(f"Model Recall: {rec:.4f}")
+print("\nClassification Report Summary:")
+print(classification_report(y_test, y_pred, zero_division=0))</code></pre>
+
+            <h2 class="artefact-section-title">Critical Analysis</h2>
+
+            <p>
+              This machine learning artifact predicts whether specific corporate roles will necessitate mandatory
+              workforce upskilling by 2030. As artificial intelligence automates routine operations, enterprises face
+              critical operational bottlenecks. Determining exactly which employees require retraining is
+              traditionally a slow, subjective process governed by management assumptions or the rigid keyword
+              heuristics of the provided foundational JavaScript classifier example. By framing this as a binary
+              classification problem where a predictive algorithm evaluates inputs like average salary, years of
+              experience, and baseline automation risk, the model provides a structured framework to support long
+              term organizational resilience and workplace sustainability (Chang, 2022). It allows executives to
+              proactively identify vulnerable employment sectors and allocate educational budgets efficiently
+              before technological disruption renders those specific workforce skills completely obsolete.
+            </p>
+            <p>
+              The model was constructed utilizing a Random Forest Classifier trained on the Kaggle Artificial
+              Intelligence Job Market dataset (Kalita, Bhattacharyya and Roy, 2024). Moving beyond the basic text
+              matching mechanisms of the provided sample code, this ensemble approach identifies complex
+              hidden interactions. During evaluation, the algorithm achieved a baseline testing accuracy of
+              approximately fifty two percent. The precision metric, which measures the proportion of correctly
+              identified upskilling candidates against all positive predictions, was relatively moderate. Concurrently,
+              the recall score highlighted limitations in capturing every individual who genuinely requires retraining.
+              These modest performance metrics indicate that the relationship between basic job statistics and
+              future upskilling needs is highly nonlinear, requiring richer feature engineering to cross the threshold
+              into enterprise grade reliability.
+            </p>
+            <p>
+              Deploying this predictive algorithm introduces significant ethical hazards, primarily concerning
+              systemic algorithmic bias and socio-technical workforce discrimination (Walton, 2024). The
+              underlying dataset relies entirely on historical labor statistics, which inherently perpetuate
+              deep-seated societal biases regarding age, geography, and educational access. If the model
+              correlates prolonged experience with a lower capacity to adapt, it could inappropriately recommend
+              younger demographics for critical upskilling investments while systematically marginalizing older,
+              experienced professionals. This violates foundational equity principles within computing, creating
+              clear black box transparency vulnerabilities.
+            </p>
+
+            <h3>References</h3>
+            <ul>
+              <li>
+                Chang, V. (2022) <em>Novel AI and Data Science Advancements for Sustainability in the Era of
+                COVID-19</em>. London, UK: Academic Press.
+              </li>
+              <li>
+                Kalita, J.K., Bhattacharyya, D.K. and Roy, S. (2024) <em>Fundamentals of Data Science: Theory and
+                Practice</em>. London, UK: Academic Press. Available at:
+                <a href="https://www.sciencedirect.com/book/9780443186561/fundamentals-of-data-science"
+                  >https://www.sciencedirect.com/book/9780443186561/fundamentals-of-data-science</a
+                >
+                (Accessed: 30 May 2026).
+              </li>
+              <li>
+                Walton, D.J. (2024) <em>Culturally Responsive Computing: An Introduction into Computer Science, Security, and
+                Technology</em>. Boston, MA: ROTEL. Available at:
+                <a href="https://rotel.pressbooks.pub/culturally-responsive-computing/"
+                  >https://rotel.pressbooks.pub/culturally-responsive-computing/</a
+                >
+                (Accessed: 30 May 2026).
+              </li>
+            </ul>
+
+            <ul class="actions">
+              <li><a href="../launch-into-computing.html#artefacts" class="button primary">Back to Launch into Computing</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <footer id="footer">
+        <div class="inner">
+          <ul class="copyright">
+            <li>&copy; 2026 Eziuche Emmanuel</li>
+            <li>
+              Design: <a href="https://html5up.net/forty">Forty</a> by
+              <a href="https://html5up.net">HTML5 UP</a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/jquery.scrolly.min.js"></script>
+    <script src="../../assets/js/jquery.scrollex.min.js"></script>
+    <script src="../../assets/js/browser.min.js"></script>
+    <script src="../../assets/js/breakpoints.min.js"></script>
+    <script src="../../assets/js/util.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/menu-drawer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="../../assets/js/code-highlight.js"></script>
+  </body>
+</html>
