@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!--
+  Forty by HTML5 UP — html5up.net | CCA 3.0
+  Launch into Computing — Unit 8 detail — Eziuche Emmanuel.
+-->
+<html lang="en">
+  <head>
+    <title>Unit 8 — Launch into Computing | Eziuche Emmanuel</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta
+      name="description"
+      content="Unit 8 — Cybersecurity threat assessment and mitigation plan — Eziuche Emmanuel, MSc Artificial Intelligence, University of Essex."
+    />
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/portfolio.css" />
+    <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+  </head>
+  <body class="is-preload">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="wrapper">
+      <header id="header">
+        <a href="../../index.html" class="logo"><strong>Eziuche Emmanuel</strong> <span>MSc in Artificial Intelligence at University of Essex</span></a>
+        <nav><a href="#menu">Menu</a></nav>
+      </header>
+
+      <nav id="menu">
+        <ul class="links" id="portfolio-menu-links"></ul>
+      </nav>
+
+      <div id="main" class="alt">
+        <section>
+          <div class="inner">
+            <header class="major">
+              <h1>Unit 8</h1>
+            </header>
+            <p class="portfolio-note">
+              Module: <a href="../launch-into-computing.html">Launch into Computing</a>
+            </p>
+
+            <h2 class="artefact-section-title">Cybersecurity Threat Assessment and Mitigation Plan</h2>
+
+            <p>by <strong>Eziuche Emmanuel</strong></p>
+
+            <h3>Scenario and Threat Assessment</h3>
+            <p>
+              This report examines a mid-sized healthcare enterprise currently facing targeted
+              ransomware attacks. The organization relies on centralized relational databases and
+              distributed cloud microservices to manage confidential patient telemetry and payroll
+              records. Migrating sensitive healthcare data to distributed, expanding cloud environments
+              fundamentally alters the risk profile, introducing significant vulnerabilities that attackers
+              frequently exploit (Cilluffo, 2022).
+            </p>
+            <p>
+              The primary threat vector is ransomware, malicious software designed to infiltrate networks,
+              encrypt operational databases, and extort payment. The enterprise is particularly exposed
+              due to unpatched endpoint operating systems across administrative workstations. These
+              vulnerabilities allow ransomware payloads to execute remote code and move laterally
+              across the network. Furthermore, the organization is hindered by human-centric
+              psychological vulnerabilities. Spear-phishing campaigns consistently deceive personnel,
+              providing the initial entry point for attackers. Effective threat modeling must account for
+              these vulnerabilities in user interface design, as poor interactions often facilitate credential
+              theft (Akinsola and Ebenezer, 2021). Once valid credentials are compromised, adversaries
+              gain unrestricted access to the infrastructure, effectively freezing clinical pipelines, locking
+              patient databases, and halting core medical operations.
+            </p>
+
+            <h3>Mitigation Strategies and Justifications</h3>
+            <p>
+              To neutralize these threats, the enterprise must implement a rigorous defense-in-depth
+              strategy. First, Multi-Factor Authentication (MFA) must be mandated across all system
+              entry points. MFA mitigates credential harvesting risks by requiring an independent
+              validation token&mdash;such as a biometric or hardware-based authenticator&mdash;before access is
+              granted. This control prevents attackers from utilizing stolen passwords to deploy payloads.
+            </p>
+            <p>
+              Second, the organization must enforce the principle of least privilege within its Identity and
+              Access Management (IAM) framework. By confining database access to role-specific
+              requirements, the enterprise reduces its internal attack surface. If an administrative
+              account is compromised, least privilege effectively restricts lateral movement, preventing
+              widespread network encryption. Third, robust cryptographic encryption is required for data
+              protection. The enterprise must apply the Advanced Encryption Standard (AES-256) for all
+              data at-rest within storage databases. Concurrently, Transport Layer Security (TLS 1.3)
+              must be mandated for all active network traffic and API communications. Encryption
+              ensures that even if actors exfiltrate data, the intercepted information remains useless for
+              secondary extortion schemes (Chang, 2022).
+            </p>
+
+            <h3>Ethical, Legal, and Compliance Considerations</h3>
+            <p>
+              Implementing these mitigations involves significant legal and ethical responsibilities.
+              Legally, the enterprise must ensure strict adherence to the General Data Protection
+              Regulation (GDPR). Since the databases house sensitive medical records, any
+              unauthorized data exposure or availability loss constitutes a direct violation of Article 5 data
+              minimization and security principles. Compliance mandates prompt incident reporting and
+              robust protection measures to avoid substantial regulatory penalties. Furthermore, the
+              organization should align its security posture with the ISO/IEC 27001 framework,
+              establishing a comprehensive Information Security Management System (ISMS) to
+              systematically manage ongoing risks.
+            </p>
+            <p>
+              Ethically, cybersecurity professionals hold a fundamental duty to protect user privacy and
+              maintain system transparency. Safeguarding digital assets transcends basic regulatory
+              checklists; it is a moral imperative to ensure that patient care remains available during
+              crises. As Walton (2024) emphasizes, the design of computing systems must remain
+              responsive to the needs of the diverse populations they serve. Therefore, designing
+              inclusive, resilient computing systems guarantees that organizational continuity is
+              maintained without unnecessarily compromising individual privacy rights. Treating security
+              as a social responsibility strengthens institutional legitimacy, thereby better protecting the
+              most vulnerable users across its network.
+            </p>
+
+            <h3>References</h3>
+            <ul>
+              <li>
+                Akinsola, T. and Ebenezer, J. (2021) <em>Application of Artificial Intelligence in User Interfaces
+                Design for Cyber Security Threat Modeling</em>. London: IntechOpen.
+              </li>
+              <li>
+                Chang, V. (2022) <em>Novel AI and Data Science Advancements for Sustainability in the Era of
+                COVID-19</em>. London, UK: Academic Press.
+              </li>
+              <li>
+                Cilluffo, F. (2022) &lsquo;Cloud Computing Risks and National Security Keeping Pace With
+                Expanding Technology&rsquo;, <em>Center for Cyber and Homeland Security at Auburn University</em>.
+              </li>
+              <li>
+                Walton, D.J. (2024) <em>Culturally Responsive Computing: An Introduction into Computer Science, Security, and
+                Technology</em>. Boston, MA: ROTEL. Available at:
+                <a href="https://rotel.pressbooks.pub/culturally-responsive-computing/"
+                  >https://rotel.pressbooks.pub/culturally-responsive-computing/</a
+                >
+                (Accessed: 12 June 2026).
+              </li>
+            </ul>
+
+            <ul class="actions">
+              <li><a href="../launch-into-computing.html#artefacts" class="button primary">Back to Launch into Computing</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <footer id="footer">
+        <div class="inner">
+          <ul class="copyright">
+            <li>&copy; 2026 Eziuche Emmanuel</li>
+            <li>
+              Design: <a href="https://html5up.net/forty">Forty</a> by
+              <a href="https://html5up.net">HTML5 UP</a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/jquery.scrolly.min.js"></script>
+    <script src="../../assets/js/jquery.scrollex.min.js"></script>
+    <script src="../../assets/js/browser.min.js"></script>
+    <script src="../../assets/js/breakpoints.min.js"></script>
+    <script src="../../assets/js/util.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/menu-drawer.js"></script>
+  </body>
+</html>
