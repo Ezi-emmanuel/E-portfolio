@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!--
+  Forty by HTML5 UP — html5up.net | CCA 3.0
+  Launch into Computing — Unit 9 detail — Eziuche Emmanuel.
+-->
+<html lang="en">
+  <head>
+    <title>Unit 9 — Launch into Computing | Eziuche Emmanuel</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta
+      name="description"
+      content="Unit 9 — Disaster recovery plan for Airbnb — Eziuche Emmanuel, MSc Artificial Intelligence, University of Essex."
+    />
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/portfolio.css" />
+    <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+  </head>
+  <body class="is-preload">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="wrapper">
+      <header id="header">
+        <a href="../../index.html" class="logo"><strong>Eziuche Emmanuel</strong> <span>MSc in Artificial Intelligence at University of Essex</span></a>
+        <nav><a href="#menu">Menu</a></nav>
+      </header>
+
+      <nav id="menu">
+        <ul class="links" id="portfolio-menu-links"></ul>
+      </nav>
+
+      <div id="main" class="alt">
+        <section>
+          <div class="inner">
+            <header class="major">
+              <h1>Unit 9</h1>
+            </header>
+            <p class="portfolio-note">
+              Module: <a href="../launch-into-computing.html">Launch into Computing</a>
+            </p>
+
+            <h2 class="artefact-section-title">Disaster Recovery Plan</h2>
+            <p><em>Using Airbnb as Case Study</em></p>
+
+            <p>by <strong>Eziuche Emmanuel</strong></p>
+
+            <p>
+              Airbnb operates as a cloud-native platform, meaning its entire business model is
+              predicated on the availability of its Amazon Web Services (AWS) infrastructure.
+              Because the organization manages global transactions, any disruption to this cloud
+              environment poses an existential risk to its operations. This analysis focuses on the
+              disaster recovery architecture necessary to protect Airbnb against significant service
+              interruptions.
+            </p>
+
+            <h3>Risk Assessment</h3>
+            <p>
+              Airbnb faces critical vulnerabilities inherent in distributed cloud architectures. Primarily,
+              AWS regional outages pose a severe risk to service availability, potentially halting
+              global transactions. Furthermore, sophisticated cyberattacks, such as ransomware,
+              threaten data integrity and operational viability. Integrating expanding technology
+              introduces significant cloud computing vulnerabilities that attackers frequently exploit
+              (Cilluffo, 2022). Additionally, configuration errors or administrative insider threats can
+              cause systemic failures, necessitating robust, validated recovery pathways to prevent
+              prolonged downtime and revenue loss. The scale of the platform means that even
+              minor latencies can cascade, significantly impacting the customer experience.
+              Comprehensive risk modeling remains essential for proactive defense.
+            </p>
+
+            <h3>Recovery Strategy</h3>
+            <p>
+              To ensure business continuity, Airbnb must employ an automated DRP anchored in
+              AWS Elastic Disaster Recovery (DRS). The recovery process follows a tiered strategy:
+            </p>
+            <ul>
+              <li>
+                <strong>Detection and Triage:</strong> Automated monitoring triggers immediate alerts upon system
+                anomalies or throughput degradation.
+              </li>
+              <li>
+                <strong>Failover:</strong> Traffic is rerouted to a secondary standby AWS region using Route 53
+                DNS failover mechanisms, ensuring high availability.
+              </li>
+              <li>
+                <strong>Data Restoration:</strong> Utilizing immutable snapshots and automated backups, data is
+                restored to the last known good state. Tools like Bacula, when integrated with
+                cloud-native S3 object locking, ensure data immutability against corruption (Mell
+                and Grance, 2011).
+              </li>
+            </ul>
+            <p>
+              To minimize downtime and ensure integrity, Airbnb must implement cryptographic
+              hashing for all backups. This verifies that data has not been tampered with during
+              transit or storage (Armbrust et al., 2010). Empowerment of risk management requires
+              this technical infrastructure to be aligned with enterprise strategic goals (Hakan and
+              Kapstad, 2021). Continuous testing via game day drills ensures that failover
+              procedures remain effective under real-world pressures. These drills are essential for
+              verifying that the team can meet the Recovery Time Objectives and Recovery Point
+              Objectives defined by the business. This creates a resilient feedback loop,
+              strengthening the overall architecture against unforeseen threats.
+            </p>
+
+            <h3>Ethical, Legal, and Professional Considerations</h3>
+            <p>
+              Implementing this DRP involves critical legal and ethical obligations. Under the GDPR,
+              Airbnb is legally mandated to protect personal user data, including payment details and
+              location history. A failure to restore systems effectively could result in unauthorized
+              data exposure, leading to severe regulatory penalties. Privacy concerns are
+              heightened in cloud environments where data sovereignty is often ambiguous (Kshetri,
+              2013).
+            </p>
+            <p>
+              Professionally, Airbnb holds a duty to its global user base to maintain a trustworthy
+              platform. Ethical implementation of recovery plans necessitates transparency
+              regarding service interruptions. Rather than merely treating DR as a technical
+              checkbox, leadership must view resilience as a fundamental component of the user
+              experience. By proactively managing these risks, the organization upholds its
+              commitment to reliability, ensuring that the trust placed by hosts and guests remains
+              uncompromised. This requires a balanced approach where technical resilience meets
+              the high-level governance frameworks necessary for long-term sustainable growth in
+              the competitive digital hospitality market. Furthermore, developers must embed robust
+              security-by-design principles into the entire recovery lifecycle, ensuring that ethical
+              considerations are addressed as early as the planning phase, rather than
+              post-incident.
+            </p>
+
+            <h3>References</h3>
+            <ul>
+              <li>
+                Armbrust, M. et al. (2010) &lsquo;A View of Cloud Computing&rsquo;, <em>Communications of the ACM</em>, 53(4),
+                pp. 50&ndash;58.
+              </li>
+              <li>
+                Cilluffo, F. (2022) &lsquo;Cloud Computing Risks and National Security Keeping Pace With
+                Expanding Technology&rsquo;, <em>Center for Cyber and Homeland Security at Auburn University</em>.
+              </li>
+              <li>
+                Hakan, J. and Kapstad, P. (2021) <em>Empowered Enterprise Risk Management: Theory and
+                Practice</em>. Newark: John Wiley &amp; Sons.
+              </li>
+              <li>
+                Kshetri, N. (2013) &lsquo;Privacy and security issues in cloud computing&rsquo;, <em>Telecommunications Policy</em>,
+                37(6), pp. 493&ndash;502.
+              </li>
+              <li>
+                Mell, P. and Grance, T. (2011) <em>The NIST Definition of Cloud Computing</em>. Gaithersburg, MD:
+                National Institute of Standards and Technology.
+              </li>
+            </ul>
+
+            <ul class="actions">
+              <li><a href="../launch-into-computing.html#artefacts" class="button primary">Back to Launch into Computing</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <footer id="footer">
+        <div class="inner">
+          <ul class="copyright">
+            <li>&copy; 2026 Eziuche Emmanuel</li>
+            <li>
+              Design: <a href="https://html5up.net/forty">Forty</a> by
+              <a href="https://html5up.net">HTML5 UP</a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/jquery.scrolly.min.js"></script>
+    <script src="../../assets/js/jquery.scrollex.min.js"></script>
+    <script src="../../assets/js/browser.min.js"></script>
+    <script src="../../assets/js/breakpoints.min.js"></script>
+    <script src="../../assets/js/util.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/menu-drawer.js"></script>
+  </body>
+</html>
