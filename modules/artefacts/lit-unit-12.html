@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<!--
+  Forty by HTML5 UP — html5up.net | CCA 3.0
+  Launch into Computing — Unit 12 detail — Eziuche Emmanuel.
+-->
+<html lang="en">
+  <head>
+    <title>Unit 12 — Launch into Computing | Eziuche Emmanuel</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta
+      name="description"
+      content="Unit 12 — Code exploration and critically evaluating AI as an emerging technology — Eziuche Emmanuel, MSc Artificial Intelligence, University of Essex."
+    />
+    <link rel="stylesheet" href="../../assets/css/main.css" />
+    <link rel="stylesheet" href="../../assets/css/portfolio.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css"
+    />
+    <noscript><link rel="stylesheet" href="../../assets/css/noscript.css" /></noscript>
+  </head>
+  <body class="is-preload">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div id="wrapper">
+      <header id="header">
+        <a href="../../index.html" class="logo"><strong>Eziuche Emmanuel</strong> <span>MSc in Artificial Intelligence at University of Essex</span></a>
+        <nav><a href="#menu">Menu</a></nav>
+      </header>
+
+      <nav id="menu">
+        <ul class="links" id="portfolio-menu-links"></ul>
+      </nav>
+
+      <div id="main" class="alt">
+        <section>
+          <div class="inner">
+            <header class="major">
+              <h1>Unit 12</h1>
+            </header>
+            <p class="portfolio-note">
+              Module: <a href="../launch-into-computing.html">Launch into Computing</a>
+            </p>
+
+            <h2 class="artefact-section-title">Evaluating the Development Models of Two Programming Languages</h2>
+            <p><em>Part A — Code Exploration</em></p>
+
+            <p>by <strong>Eziuche Emmanuel</strong></p>
+
+            <p>
+              Download originals:
+              <a href="../../artefacts/lit-unit-12-code-exploration.pdf">Part A PDF</a>
+              &middot;
+              <a href="../../artefacts/lit-unit-12-code-exploration.docx">Part A Word</a>
+              &middot;
+              <a href="../../artefacts/lit-unit-12-part-b-presentation.pptx">Part B PowerPoint</a>
+            </p>
+
+            <h3>1. Introduction</h3>
+
+            <p>
+              This section documents hands-on testing of two scripts (Python and JavaScript) that solve the same problem: take a list of personal names, remove duplicates, and return the result in alphabetical order. Both scripts appear straightforward at first glance, but running them reveals a subtle flaw that matters in real applications. The following sections describe what I observed, the modifications I made, and a brief comparison of the two implementations.
+            </p>
+            <h3>2. Running the Original Scripts</h3>
+            <p>
+              Figures 1 and 2 show the tutor-provided source code. I executed both files using the built-in test data:
+            </p>
+            <pre class="code-block"><code class="language-python">["Alice", "bob", "alice", "Charlie", "BOB", "dave", "Eve", "charlie"]</code></pre>
+            <figure class="circuit-diagram-figure performance-graph-figure">
+              <img
+                src="../../images/lit-unit-12-fig-1.png"
+                alt="Figure 1. Tutor-provided Python script opened in Visual Studio Code."
+                loading="lazy"
+              />
+              <figcaption class="performance-graph-caption">
+                <em>Figure 1. Tutor-provided Python script opened in Visual Studio Code.</em>
+              </figcaption>
+            </figure>
+            <figure class="circuit-diagram-figure performance-graph-figure">
+              <img
+                src="../../images/lit-unit-12-fig-2.png"
+                alt="Figure 2. Tutor-provided JavaScript script opened in Visual Studio Code."
+                loading="lazy"
+              />
+              <figcaption class="performance-graph-caption">
+                <em>Figure 2. Tutor-provided JavaScript script opened in Visual Studio Code.</em>
+              </figcaption>
+            </figure>
+            <p>
+              Figures 3 and 4 show the console output from each original script:
+            </p>
+            <figure class="circuit-diagram-figure performance-graph-figure">
+              <img
+                src="../../images/lit-unit-12-fig-3.png"
+                alt="Figure 3. Console output from running the original tutor Python script."
+                loading="lazy"
+              />
+              <figcaption class="performance-graph-caption">
+                <em>Figure 3. Console output from running the original tutor Python script.</em>
+              </figcaption>
+            </figure>
+            <figure class="circuit-diagram-figure performance-graph-figure">
+              <img
+                src="../../images/lit-unit-12-fig-4.png"
+                alt="Figure 4. Console output from running the original tutor JavaScript script."
+                loading="lazy"
+              />
+              <figcaption class="performance-graph-caption">
+                <em>Figure 4. Console output from running the original tutor JavaScript script.</em>
+              </figcaption>
+            </figure>
+            <p>
+              The eight input names became eight output names. Duplicates such as &quot;Alice&quot; / &quot;alice&quot; and &quot;bob&quot; / &quot;BOB&quot; were not removed. This happens because both set() in Python and Set in JavaScript compare strings in a case-sensitive way (Python Software Foundation, 2024; Mozilla Developer Network, 2024). From a user&#x27;s perspective the list still looks messy even after processing.
+            </p>
+            <p>
+              I also noticed that the default sort order groups capitalised names before lowercase ones (&#x27;Alice&#x27; before &#x27;alice&#x27;). That is standard lexicographic (ASCII-based) sorting, not a bug in itself, but it makes the output harder to read when casing is inconsistent (McConnell, 2004).
+            </p>
+            <p>
+              To confirm behaviour with my own input, I temporarily changed the test list to include an empty string and a duplicate with extra whitespace (&quot; bob &quot;). Neither script handled these edge cases; whitespace duplicates were kept separate. That reinforced my view that the scripts work for a demo but would need hardening before use with real user data.
+            </p>
+            <h3>3. Modifications Made</h3>
+            <p>
+              For Part A1 I made one focused change to each script: case-insensitive deduplication with consistent title-case output, plus a simple input validation check. Figures 5 and 6 show the modified scripts with inline comments.
+            </p>
+            <figure class="circuit-diagram-figure performance-graph-figure">
+              <img
+                src="../../images/lit-unit-12-fig-5.png"
+                alt="Figure 5. Modified Python script (clean_names_modified.py) with inline comments and validation."
+                loading="lazy"
+              />
+              <figcaption class="performance-graph-caption">
+                <em>Figure 5. Modified Python script (clean_names_modified.py) with inline comments and validation.</em>
+              </figcaption>
+            </figure>
+            <figure class="circuit-diagram-figure performance-graph-figure">
+              <img
+                src="../../images/lit-unit-12-fig-6.png"
+                alt="Figure 6. Modified JavaScript script (cleanNames_modified.js) with inline comments and validation."
+                loading="lazy"
+              />
+              <figcaption class="performance-graph-caption">
+                <em>Figure 6. Modified JavaScript script (cleanNames_modified.js) with inline comments and validation.</em>
+              </figcaption>
+            </figure>
+            <p>
+              Python change: Before adding a name to the tracking dictionary, I convert it to lowercase for comparison. The first occurrence is stored in title case using .capitalize(). I also added isinstance(names, list) so passing a string raises a clear TypeError instead of iterating over characters silently.
+            </p>
+            <p>
+              JavaScript change: I replaced the one-line Set approach with a Map keyed by lowercase names, storing a normalised title-case value. I added Array.isArray() validation and used localeCompare() for sorting so alphabetical order ignores capitalisation.
+            </p>
+            <p>
+              Figures 7 and 8 show the improved output and error handling when invalid input is supplied:
+            </p>
+            <figure class="circuit-diagram-figure performance-graph-figure">
+              <img
+                src="../../images/lit-unit-12-fig-7.png"
+                alt="Figure 7. Console output from running the modified Python script."
+                loading="lazy"
+              />
+              <figcaption class="performance-graph-caption">
+                <em>Figure 7. Console output from running the modified Python script.</em>
+              </figcaption>
+            </figure>
+            <figure class="circuit-diagram-figure performance-graph-figure">
+              <img
+                src="../../images/lit-unit-12-fig-8.png"
+                alt="Figure 8. Console output from running the modified JavaScript script."
+                loading="lazy"
+              />
+              <figcaption class="performance-graph-caption">
+                <em>Figure 8. Console output from running the modified JavaScript script.</em>
+              </figcaption>
+            </figure>
+            <p>
+              Five unique people appeared instead of eight. When I deliberately passed invalid input (&quot;not a list&quot; / &quot;not an array&quot;), both modified scripts raised an explicit error message rather than producing nonsense output. Inline comments in the modified files explain each step: what the guard clause does, why lowercase keys are used, and how sorting differs from the original.
+            </p>
+            <h3>4. Comparing Syntax and Structure</h3>
+            <p>
+              At a structural level the two originals are nearly identical: define a function, deduplicate with a set-like structure, sort, return, then print test results. This reflects how both languages comfortably support procedural programming — a sequence of steps without classes or objects (Sommerville, 2016).
+            </p>
+            <p>
+              Differences appear in the details. Python uses def process_names(names): with snake_case naming, which aligns with PEP 8 style guidance (van Rossum et al., 2001). JavaScript uses function processNames(names) with camelCase, which is conventional in front-end and Node.js projects (MDN, 2024). Python&#x27;s significant whitespace (indentation) enforces readable block structure; JavaScript relies on curly braces, which can be omitted in short scripts but are clearer for beginners.
+            </p>
+            <p>
+              For deduplication, Python&#x27;s list(set(names)) is concise (one line) whereas JavaScript spreads a Set back into an array: [...new Set(names)]. I found Python slightly quicker to read for this task, but JavaScript&#x27;s spread syntax is idiomatic once you are used to ES6 features (ECMA International, 2024).
+            </p>
+            <h3>5. Ease of Understanding and Editing</h3>
+            <p>
+              Both scripts are short enough that a new developer could understand them in a few minutes. Python felt marginally more approachable because it reads closer to plain English (print, def, list) and does not require knowledge of the spread operator. JavaScript&#x27;s console.log and [...new Set()] assume familiarity with browser or Node tooling.
+            </p>
+            <p>
+              Editing was straightforward in both cases. I used VS Code for both files; Python gave immediate feedback when I forgot indentation, whereas JavaScript was more permissive. For the modification exercise, adding a loop and dictionary/map was equally easy in both languages, though Python&#x27;s .capitalize() is built in while JavaScript needed manual string slicing for title case.
+            </p>
+            <h3>6. Differences in Output and Errors</h3>
+            <p>
+              With the original tutor scripts, output was logically the same across languages — eight names, same order — which confirms the algorithms are equivalent. Neither original script produced runtime errors with the provided test data; they fail silently from a data-quality perspective by leaving case duplicates in place. That kind of silent failure is arguably more dangerous than a crash, because downstream systems may treat &quot;Alice&quot; and &quot;alice&quot; as different people (O&#x27;Regan, 2024).
+            </p>
+            <p>
+              After modification, both scripts produced identical cleaned lists. Python raised TypeError; JavaScript raised TypeError via throw new Error — same conceptual behaviour, slightly different syntax. JavaScript&#x27;s error message appeared in the console with a stack trace when run in Node; Python&#x27;s traceback pointed to the exact line of the guard clause. Both were helpful for debugging.
+            </p>
+            <h3>7. Brief Conclusion to Part A1</h3>
+            <p>
+              Running and modifying these scripts showed me that two languages can solve the same problem with almost identical logic while differing in syntax, conventions, and tooling. The original scripts expose a realistic oversight — assuming clean, consistent input — that only becomes obvious when you test with messy data. Adding comments and validation turned a demo into something closer to production-aware code, which set the stage for the broader comparison in Part A2 and the ethical discussion in Part A3.
+            </p>
+
+            <h2 class="artefact-section-title">Part A2: Language Comparison Report</h2>
+            <h3>1. Introduction</h3>
+
+            <p>
+              Python and JavaScript are two of the most widely used languages in industry today, yet they evolved for different primary environments: Python from a general-purpose scripting background with strong uptake in science and automation, and JavaScript as the language of the web browser, later expanded to servers via Node.js (Stack Overflow, 2024). This report compares them across programming model, readability, error handling, and suitability for modern computing tasks, drawing on my practical work in Part A1 and on published sources.
+            </p>
+            <h3>2. Programming Model</h3>
+            <p>
+              Both languages used in the tutor scripts follow a procedural style: functions operate on data structures without defining classes. Neither Python nor JavaScript forces object-oriented design, though both support it fully. Python through class syntax and JavaScript through prototypes and ES6 classes (Sommerville, 2016).
+            </p>
+            <p>
+              Python is often described as multi-paradigm: developers commonly mix procedural scripts, object-oriented modules, and functional patterns such as list comprehensions and map()/filter(). The tutor script is idiomatic procedural Python.
+            </p>
+            <p>
+              JavaScript is similarly flexible. The original script uses a function declaration and built-in collection types, which is typical of small utilities. In larger applications, JavaScript often adopts event-driven and asynchronous models, callbacks, Promises, and async/await, especially for web APIs and user interfaces (Flanagan, 2020). That aspect did not surface in the name-cleaning exercise but is central to why JavaScript dominates interactive web development.
+            </p>
+            <p>
+              One practical difference I noticed: Python&#x27;s standard library includes rich data structures out of the box, while JavaScript leans on language primitives (Set, Map, arrays) defined in the ECMAScript specification (ECMA International, 2024). For a ten-line script this is irrelevant; at scale it influences how teams structure projects.
+            </p>
+            <h3>3. Readability and Developer Accessibility</h3>
+            <p>
+              Readability affects maintenance cost, defect rates, and how quickly new team members contribute (McConnell, 2004). Python emphasises explicit, readable syntax — the &quot;there should be one obvious way to do it&quot; philosophy (van Rossum et al., 2001). Keywords like def, return, and significant indentation give visual structure without extra punctuation.
+            </p>
+            <p>
+              JavaScript shares C-style syntax familiar to developers coming from Java or C#, but historically suffered from inconsistencies (var vs let, type coercion). Modern ES6+ features improve clarity, though concepts like the spread operator require learning curve investment (MDN, 2024).
+            </p>
+            <p>
+              For accessibility to beginners, Python is frequently chosen in education because setup is simple and error messages for indentation or syntax are direct. JavaScript requires understanding where code runs (browser console, Node, or embedded runtime), which adds friction for novices but pays off for web projects.
+            </p>
+            <p>
+              Industry coding standards reinforce these cultures: PEP 8 for Python and tools like ESLint for JavaScript (van Rossum et al., 2001; ECMA International, 2024). In my edits, following snake_case in Python and camelCase in JavaScript was not optional polish, it signals to other developers that the code belongs in that ecosystem.
+            </p>
+            <h3>4. Error Handling and Debugging</h3>
+            <p>
+              The original tutor scripts include no validation, no try/except or try/catch, and no logging. Invalid input would either fail unpredictably or, worse, produce misleading output. This mirrors a common junior mistake: assuming happy-path data (O&#x27;Regan, 2024).
+            </p>
+            <p>
+              Python traditionally uses exceptions (try/except/finally) and encourages &quot;easier to ask forgiveness than permission&quot; (EAFP) for many patterns. Debuggers, print() debugging, and tools like pdb are well documented (Python Software Foundation, 2024). Static type checkers such as mypy are optional but growing in adoption.
+            </p>
+            <p>
+              JavaScript also uses exceptions, but many API failures in production are handled asynchronously — network errors surface in Promise rejections rather than synchronous stack traces (Flanagan, 2020). Browser DevTools provide excellent runtime inspection; Node.js offers similar tooling. TypeScript, a superset of JavaScript, adds compile-time type checking to reduce entire classes of errors before execution.
+            </p>
+            <p>
+              In my modified scripts, both languages benefited equally from a guard clause at the top of the function. Python&#x27;s isinstance check and JavaScript&#x27;s Array.isArray express the same intent. Where they differ is developer experience when errors occur: Python tracebacks highlight line numbers clearly; JavaScript stack traces in Node are comparable but historically varied across browsers.
+            </p>
+            <p>
+              For the name-cleaning task, either language is adequate for error handling. For large distributed systems, teams often weigh Python&#x27;s simplicity against JavaScript/TypeScript&#x27;s front-to-back stack unification.
+            </p>
+            <h3>5. Suitability for Modern Computing Tasks</h3>
+            <p>
+              Web applications: JavaScript (often with TypeScript) remains the default for client-side interactivity and, through Node.js and frameworks like React and Next.js, for full-stack development (Stack Overflow, 2024). If the name-cleaning function lived in a registration form, JavaScript would run it in the browser without a round trip to the server.
+            </p>
+            <p>
+              Data science and automation: Python dominates through libraries such as NumPy, pandas, and scikit-learn, and is standard in teaching and research (Grus, 2019). Cleaning inconsistent name fields in a CSV before analysis is exactly the kind of pipeline task Python excels at.
+            </p>
+            <p>
+              Scripting and glue code: Both languages work well. Python is often preferred for system administration and ETL jobs; JavaScript fits when the organisation already operates a Node-based toolchain.
+            </p>
+            <p>
+              Performance: For a small list of names, performance is irrelevant. At scale, both are interpreted languages; bottlenecks usually move to databases or native extensions rather than the choice between set() and Set (Sommerville, 2016).
+            </p>
+            <p>
+              Mobile and embedded: Neither tutor script targets these domains directly, but JavaScript via React Native and Python via MicroPython show how languages stretch beyond their origins with trade-offs in performance and ecosystem maturity.
+            </p>
+            <h3>6. Summary</h3>
+            <p>
+              Python and JavaScript overlap more than they did a decade ago, yet their communities, conventions, and typical deployment contexts remain distinct. For a short procedural utility, either language is a reasonable choice; the decision in industry usually depends on what surrounds the code — web stack, data pipeline and team skills — rather than raw algorithmic expressiveness. My Part A1 exercise reinforced that good practice (validation, normalisation, comments) matters more than language choice for a task this size, while language choice matters greatly when integrating that task into a wider product.
+            </p>
+
+            <h2 class="artefact-section-title">Part A3: Professional Reflection</h2>
+            <h3>1. Introduction</h3>
+            <p>
+              Software is rarely neutral. Small decisions — how duplicates are detected, whether input is validated, how names are capitalised — can affect fairness, compliance, and trust. This section reflects on readable and ethical coding, bias and privacy risks, and how choices in scripts like the tutor&rsquo;s clean_names examples connect to real business and legal consequences. I draw on the ACM Code of Ethics, data protection law, and documented industry incidents.
+            </p>
+
+            <h3>2. The Importance of Readable, Ethical Code</h3>
+            <p>
+              Readable code is not merely aesthetic. McConnell (2004) argues that code is read far more often than it is written, so clarity directly reduces maintenance cost and mistakes. In the tutor scripts, sparse comments and one-line deduplication are compact but hide assumptions: that capitalisation is meaningful, that duplicates are exact string matches, and that input is always a valid list. Without comments, the next developer may copy the pattern into a customer database module without questioning those assumptions.
+            </p>
+            <p>
+              Ethical code goes further: it treats people affected by the system fairly and respects their data (ACM, 2018). The ACM principle &ldquo;avoid harm&rdquo; applies when duplicate records cause double billing, or when inconsistent name formatting prevents someone from accessing a service they are entitled to. My modification — normalising names before deduplication — is a small ethical improvement because it reduces the chance of treating one person as two.
+            </p>
+            <p>
+              Professional standards such as the BCS Code of Conduct similarly expect members to have due regard for public health, privacy, and dignity (BCS, 2022). Code reviews should ask not only &ldquo;does it work?&rdquo; but &ldquo;who could be harmed if it works wrongly?&rdquo;
+            </p>
+
+            <h3>3. Bias, Privacy, and Misuse in Programming</h3>
+            <p>
+              Bias can enter systems through training data, rule design, or — as in these scripts — simplistic string handling. Noble (2018) documents how apparently technical choices in search and classification systems can reinforce social inequalities. The tutor scripts do not use machine learning, but they illustrate normalisation bias: treating &ldquo;BOB&rdquo; and &ldquo;bob&rdquo; as different people could skew reports (e.g. attendance counts, fraud checks, diversity metrics).
+            </p>
+            <p>
+              Privacy matters because names are personal data under UK GDPR and EU GDPR (Information Commissioner&rsquo;s Office, 2024). Processing names — collecting, deduplicating, storing — also requires a lawful basis, accuracy, and appropriate security. Silent duplication undermines data accuracy, one of the GDPR principles (European Union, 2016). An organisation that merges customer records incorrectly might disclose one person&rsquo;s data to another — a serious breach with regulatory and reputational impact.
+            </p>
+            <p>
+              Misuse covers intentional abuse: scraping names for spam, combining lists without consent, or re-identifying individuals in anonymised datasets. Even benign utility functions can be repurposed. Developers should consider purpose limitation and document intended use (ICO, 2024).
+            </p>
+
+            <h3>4. Small Coding Choices, Real-World Impact</h3>
+            <p>
+              The tutor scripts feel trivial, but similar logic appears in production systems with larger stakes.
+            </p>
+            <p>
+              Case sensitivity in identity systems: Many login and CRM systems enforce case-insensitive email addresses but case-sensitive usernames — or the reverse. Inconsistent rules confuse users and create duplicate accounts. The original scripts&rsquo; behaviour mirrors that confusion at small scale.
+            </p>
+            <p>
+              Apple Card credit limits (2019): Apple and Goldman Sachs faced investigation after users reported that women received lower credit limits than men with similar financial profiles. Apple co-founder Steve Wozniak publicly stated his wife received a lower limit despite shared assets (BBC News, 2019). While the algorithm&rsquo;s details were proprietary, the incident shows how automated decisions draw scrutiny under fairness and equality law.
+            </p>
+            <p>
+              Healthcare and emergency services: Duplicate patient records from inconsistent name entry have contributed to missed appointments and treatment errors (O&rsquo;Regan, 2024). Deduplication that ignores capitalisation, nicknames, or transliteration is a known data-quality challenge.
+            </p>
+            <p>
+              Legal exposure: Under UK GDPR, data controllers must ensure personal data is accurate (Article 5(1)(d)). Failing to deduplicate case-insensitive duplicates could be argued as inaccuracy in a complaint to the ICO. For a business, the cost of fixing data quality at source is almost always lower than cleaning up after a breach, a failed audit, or reputational damage (Sommerville, 2016).
+            </p>
+
+            <h3>5. Lessons from My Modifications</h3>
+            <p>
+              Adding validation and case-insensitive deduplication took fewer than twenty lines in each language but changed outcomes dramatically — from eight names to five, and from silent acceptance of bad input to explicit errors. That aligns with fail-fast design: surface problems early (McConnell, 2004).
+            </p>
+            <p>
+              I also documented assumptions in comments so future maintainers understand why lowercase keys are used. That supports ethical handover: the next person is less likely to revert to a harmful pattern without realising it.
+            </p>
+            <p>
+              From a professional standpoint, I would expect this code to include unit tests (e.g. inputs with mixed case, empty lists, invalid types) before deployment. Neither tutor script included tests; adding them would be the next step in a workplace setting.
+            </p>
+
+            <h3>6. Conclusion</h3>
+            <p>
+              Programming is a social and legal activity, not only a technical one. The tutor&rsquo;s Python and JavaScript scripts are useful teaching tools precisely because their flaws are realistic: they run without crashing yet produce misleading results. Part A1 showed how testing reveals those flaws; Part A2 showed that either language can express fixes cleanly; Part A3 argues that the responsibility to fix them — and to think about bias, privacy, and harm — rests with the developer and the organisation, not the interpreter.
+            </p>
+            <p>
+              As computing professionals, we should write code that colleagues can read, users can trust, and regulators can see meets basic data-quality expectations. Small choices in a ten-line script are practice for much larger decisions later in a career.
+            </p>
+
+            <h3>References (Part A)</h3>
+            <ul>
+              <li>ACM (2018) <em>ACM Code of Ethics and Professional Conduct</em>. Available at: <a href="https://www.acm.org/code-of-ethics">https://www.acm.org/code-of-ethics</a> (Accessed: 20 July 2026).</li>
+              <li>BBC News (2019) &lsquo;Apple Card investigated after gender discrimination claims&rsquo;, <em>BBC News</em>, 10 November. Available at: <a href="https://www.bbc.co.uk/news/business-50388439">https://www.bbc.co.uk/news/business-50388439</a> (Accessed: 15 July 2026).</li>
+              <li>BCS (2022) <em>BCS Code of Conduct</em>. Available at: <a href="https://www.bcs.org/membership-and-registrations/become-a-member/bcs-code-of-conduct/">https://www.bcs.org/membership-and-registrations/become-a-member/bcs-code-of-conduct/</a> (Accessed: 15 July 2026).</li>
+              <li>ECMA International (2024) <em>ECMAScript Language Specification</em>. Available at: <a href="https://tc39.es/ecma262/">https://tc39.es/ecma262/</a> (Accessed: 16 July 2026).</li>
+              <li>European Union (2016) <em>General Data Protection Regulation (GDPR)</em>, Regulation (EU) 2016/679. Available at: <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679">https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679</a> (Accessed: 15 July 2026).</li>
+              <li>Flanagan, D. (2020) <em>JavaScript: The Definitive Guide</em>. 7th edn. Sebastopol: O&rsquo;Reilly Media.</li>
+              <li>Grus, J. (2019) <em>Data Science from Scratch</em>. 2nd edn. Sebastopol: O&rsquo;Reilly Media.</li>
+              <li>Information Commissioner&rsquo;s Office (2024) <em>Guide to the UK GDPR</em>. Available at: <a href="https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/">https://ico.org.uk/for-organisations/guide-to-data-protection/guide-to-the-general-data-protection-regulation-gdpr/</a> (Accessed: 19 July 2026).</li>
+              <li>McConnell, S. (2004) <em>Code Complete</em>. 2nd edn. Redmond: Microsoft Press.</li>
+              <li>Mozilla Developer Network (2024) <em>JavaScript reference</em>. Available at: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference</a> (Accessed: 16 July 2026).</li>
+              <li>Noble, S.U. (2018) <em>Algorithms of Oppression</em>. New York: NYU Press.</li>
+              <li>O&rsquo;Regan, G. (2024) <em>Introduction to Software Quality</em>. Cham: Springer.</li>
+              <li>Python Software Foundation (2024) <em>Python 3 Documentation</em>. Available at: <a href="https://docs.python.org/3/">https://docs.python.org/3/</a> (Accessed: 16 July 2026).</li>
+              <li>Sommerville, I. (2016) <em>Software Engineering</em>. 10th edn. Harlow: Pearson.</li>
+              <li>Stack Overflow (2024) <em>Developer Survey 2024</em>. Available at: <a href="https://survey.stackoverflow.co/2024/">https://survey.stackoverflow.co/2024/</a> (Accessed: 17 July 2026).</li>
+              <li>van Rossum, G., Warsaw, B. and Coghlan, N. (2001) <em>PEP 8 – Style Guide for Python Code</em>. Available at: <a href="https://peps.python.org/pep-0008/">https://peps.python.org/pep-0008/</a> (Accessed: 15 July 2026).</li>
+            </ul>
+
+            <hr />
+
+            <h2 class="artefact-section-title">Critically Evaluating Artificial Intelligence as an Emerging Technology</h2>
+            <p><em>Part B — Presentation</em></p>
+            <p>
+              Download:
+              <a href="../../artefacts/lit-unit-12-part-b-presentation.pptx">Part B PowerPoint presentation</a>
+            </p>
+
+            <h3>Research-Based Response</h3>
+            <p>
+              Evaluation: AI is high-value but not neutral; it amplifies bias, opacity and attack surface at scale (Jobin, Ienca and Vayena, 2019). Enterprises must balance three pillars: technical controls (secure MLOps, testing), regulation (AI Act, GDPR, NIST), and ethical culture (oversight, auditing) (NIST, 2023). Method: peer-reviewed papers, EU/UK law, and industry reports — each source verified independently.
+            </p>
+            <p>
+              Connection to Part A: minor data-quality flaws in scripts mirror production CRM/HR pipelines (O&rsquo;Regan, 2024 — equivalent logic in name deduplication). Argument: innovation without governance creates legal and reputational debt, not competitive advantage (Floridi et al., 2018). AI adoption is mainstream in development tooling (Stack Overflow, 2024) — professional duty to evaluate risks follows.
+            </p>
+
+            <h3>Technical Overview of Artificial Intelligence</h3>
+            <p>
+              AI umbrella: machine learning finds patterns; deep learning uses neural networks; generative AI (LLMs) predicts text (Russell and Norvig, 2021). Enterprise lifecycle: collect data → train → validate → deploy → monitor — ongoing loop, not one project (NIST, 2023). Generative AI does not understand meaning; fluent output can mislead users (Bender et al., 2021 — &lsquo;Stochastic Parrots&rsquo;).
+            </p>
+            <p>
+              Deployment: cloud APIs (Azure OpenAI, Bedrock), custom models, embedded analytics in CRM/ERP systems. Technical benefit: speed and scale of prediction and automation across millions of records. Technical risk: errors, adversarial inputs, and model drift propagate as fast as automation (NIST, 2023).
+            </p>
+
+            <h3>Real-World Enterprise Applications</h3>
+            <p>
+              Finance: ML for fraud detection and anti-money-laundering; AI pipelines hold sensitive transaction data (IBM, 2024). Healthcare: AI-assisted triage and documentation — requires clinical validation before patient-facing use. HR: automated CV screening and LLM chatbots; Amazon recruiting tool scrapped after gender bias (Dastin, 2018). Retail: recommendation engines and demand forecasting; data quality directly affects revenue (Grus, 2019).
+            </p>
+            <p>
+              McKinsey (2024): generative AI economic potential is large, but governance often lags deployment. Lesson from Amazon case: optimising historical data can encode discrimination — technical success ≠ ethical acceptability (Dastin, 2018).
+            </p>
+
+            <h3>Ethical Concerns</h3>
+            <p>
+              Bias and fairness: Buolamwini and Gebru (2018) Gender Shades study found higher facial recognition error rates for darker-skinned women; disparate impact in access systems. Opacity and accountability: Mittelstadt et al. (2016) — &lsquo;black box&rsquo; decisions undermine due process when algorithms affect rights. Human dignity: Floridi et al. (2018) — AI must support human agency; full automation in dismissal, credit, or care decisions raises ethical red flags.
+            </p>
+            <p>
+              Social harm and data ethics: Noble (2018) — search/classification systems can reinforce inequality; Bender et al. (2021) — consent, labour, environmental costs of training. Professional codes: ACM (2018) &lsquo;avoid harm&rsquo;; BCS (2022) — privacy and dignity. Practical response: algorithmic auditing before and after deployment (Raji et al., 2020).
+            </p>
+
+            <h3>Security Concerns</h3>
+            <p>
+              Data breaches: IBM (2024) reports global average breach cost of $4.88M; AI centralises training and inference data — higher impact if compromised. Adversarial attacks: crafted inputs fool classifiers; data poisoning corrupts models during training (NIST, 2023). Generative AI threats: OWASP (2024) LLM Top 10 includes prompt injection, insecure output handling, and model denial-of-service.
+            </p>
+            <p>
+              Supply-chain risk: third-party APIs — limited visibility into training data and updates. Social engineering: deepfakes and voice clones used in CEO fraud and phishing at scale. Enterprise response: MLOps security, adversarial red-teaming, access controls, incident plans for model drift (NIST, 2023). Balancing innovation: secure-by-design AI reduces cost of breach vs retrofitting controls after deployment (IBM, 2024).
+            </p>
+
+            <h3>Regulatory and Governance Frameworks</h3>
+            <p>
+              EU AI Act (European Parliament, 2024): risk-based — bans unacceptable uses; strict rules for high-risk AI (employment, credit, critical infra). GDPR (European Union, 2016): accuracy, lawful basis, security; Article 5(1)(d) accuracy principle for personal data. ICO (2024): UK AI guidance — Data Protection Impact Assessments for high-risk automated processing. NIST AI RMF (2023): Govern | Map | Measure | Manage. ISO/IEC 42001: certifiable AI management system.
+            </p>
+            <p>
+              Jobin, Ienca and Vayena (2019): 80+ ethics guidelines agree on principles but lack enforcement — internal auditing essential (Raji et al., 2020). Conclusion: AI is a transformative emerging technology; enterprises balance innovation with security and ethics via governance, regulation, and culture (NIST, 2023; Floridi et al., 2018). GenAI is useful for drafts — never a substitute for verified research and professional accountability.
+            </p>
+
+            <h3>Generative AI Response (Same Brief)</h3>
+            <p>
+              Ethics (AI-generated): &ldquo;AI raises important ethical issues. Bias in training data can cause discriminatory outcomes against minority groups. Many AI systems operate as &lsquo;black boxes&rsquo; making it difficult to explain decisions.&rdquo;
+            </p>
+            <p>
+              Balancing innovation (AI-generated): &ldquo;To balance innovation with responsibility, enterprises should establish AI governance committees, conduct ethical impact assessments before deployment, maintain human oversight for critical decisions.&rdquo;
+            </p>
+            <p>
+              Case study (AI-generated): &ldquo;A well-known example is Amazon&rsquo;s AI recruiting tool, which was reportedly discontinued after showing bias against women because it was trained on historical hiring data dominated by male candidates (Reuters, 2018).&rdquo;
+            </p>
+
+            <h3>Critical Comparison — Human Research vs Generative AI</h3>
+            <p>
+              Accuracy and reliability of sources: Human response uses verified Harvard refs (Bender et al., 2021; European Parliament, 2024). AI cited &lsquo;Reuters, 2018&rsquo; incompletely; some claims lacked traceable evidence. Depth and nuance: Human analysis covers GDPR + LLM fine-tuning trade-offs, supply-chain risk, sector validation. AI listed risks generically without weighing conflicts (Mittelstadt et al., 2016).
+            </p>
+            <p>
+              Ethical issues (bias, transparency, hallucinations): AI mentioned bias/black boxes but not its own hallucination risk; confident AI prose misleads readers (Bender et al., 2021). Professional appropriateness: GenAI acceptable for brainstorming; unacceptable unchecked for graded or client work (BCS, 2022; ACM, 2018). Reflection supports: fast outline, literature prompts, slide structure. Hinders: skips verification, creates false confidence, weak citations. Conclusion: human critical evaluation remains mandatory; GenAI is assistant, not author.
+            </p>
+
+            <h3>References (Part B)</h3>
+            <ul>
+              <li>ACM (2018) <em>ACM Code of Ethics and Professional Conduct</em>. Available at: <a href="https://www.acm.org/code-of-ethics">https://www.acm.org/code-of-ethics</a> (Accessed: 20 July 2026).</li>
+              <li>BCS (2022) <em>BCS Code of Conduct</em>. Available at: <a href="https://www.bcs.org/membership-and-registrations/become-a-member/bcs-code-of-conduct/">https://www.bcs.org/membership-and-registrations/become-a-member/bcs-code-of-conduct/</a> (Accessed: 20 July 2026).</li>
+              <li>Bender, E.M., Gebru, T., McMillan-Major, A. and Shmitchell, S. (2021) &lsquo;On the Dangers of Stochastic Parrots&rsquo;, <em>Proceedings of FAccT</em>, pp. 610&ndash;623.</li>
+              <li>Buolamwini, J. and Gebru, T. (2018) &lsquo;Gender Shades&rsquo;, <em>Proceedings of Machine Learning Research</em>, 81, pp. 1&ndash;15.</li>
+              <li>Dastin, J. (2018) &lsquo;Amazon scraps secret AI recruiting tool&rsquo;, <em>Reuters</em>, 10 October. Available at: <a href="https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G">https://www.reuters.com/article/us-amazon-com-jobs-automation-insight-idUSKCN1MK08G</a> (Accessed: 20 July 2026).</li>
+              <li>European Parliament (2024) <em>Regulation (EU) 2024/1689 (Artificial Intelligence Act)</em>. Available at: <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689">https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689</a> (Accessed: 20 July 2026).</li>
+              <li>European Union (2016) <em>General Data Protection Regulation</em>, Regulation (EU) 2016/679. Available at: <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679">https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679</a> (Accessed: 20 July 2026).</li>
+              <li>Floridi, L. et al. (2018) &lsquo;AI4People&rsquo;, <em>Minds and Machines</em>, 28(4), pp. 689&ndash;707.</li>
+              <li>Grus, J. (2019) <em>Data Science from Scratch</em>. 2nd edn. Sebastopol: O&rsquo;Reilly Media.</li>
+              <li>IBM (2024) <em>Cost of a Data Breach Report 2024</em>. Available at: <a href="https://www.ibm.com/reports/data-breach">https://www.ibm.com/reports/data-breach</a> (Accessed: 20 July 2026).</li>
+              <li>Information Commissioner&rsquo;s Office (2024) <em>Guidance on AI and data protection</em>. Available at: <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/">https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/</a> (Accessed: 20 July 2026).</li>
+              <li>Jobin, A., Ienca, M. and Vayena, E. (2019) &lsquo;The global landscape of AI ethics guidelines&rsquo;, <em>Nature Machine Intelligence</em>, 1(9), pp. 389&ndash;399.</li>
+              <li>McKinsey &amp; Company (2024) <em>The state of AI in early 2024</em>. Available at: <a href="https://www.mckinsey.com/capabilities/quantumblack/our-insights">https://www.mckinsey.com/capabilities/quantumblack/our-insights</a> (Accessed: 20 July 2026).</li>
+              <li>Mittelstadt, B.D. et al. (2016) &lsquo;The ethics of algorithms&rsquo;, <em>Big Data &amp; Society</em>, 3(2), pp. 1&ndash;21.</li>
+              <li>NIST (2023) <em>Artificial Intelligence Risk Management Framework (AI RMF 1.0)</em>. Gaithersburg: NIST.</li>
+              <li>Noble, S.U. (2018) <em>Algorithms of Oppression</em>. New York: NYU Press.</li>
+              <li>OWASP (2024) <em>OWASP Top 10 for LLM Applications</em>. Available at: <a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/">https://owasp.org/www-project-top-10-for-large-language-model-applications/</a> (Accessed: 20 July 2026).</li>
+              <li>Raji, I.D. et al. (2020) &lsquo;Closing the AI accountability gap&rsquo;, <em>Proceedings of FAccT</em>, pp. 33&ndash;44.</li>
+              <li>Russell, S. and Norvig, P. (2021) <em>Artificial Intelligence: A Modern Approach</em>. 4th edn. Harlow: Pearson.</li>
+              <li>Stack Overflow (2024) <em>Developer Survey 2024</em>. Available at: <a href="https://survey.stackoverflow.co/2024/">https://survey.stackoverflow.co/2024/</a> (Accessed: 20 July 2026).</li>
+            </ul>
+
+            <ul class="actions">
+              <li><a href="../launch-into-computing.html#artefacts" class="button primary">Back to Launch into Computing</a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+
+      <footer id="footer">
+        <div class="inner">
+          <ul class="copyright">
+            <li>&copy; 2026 Eziuche Emmanuel</li>
+            <li>
+              Design: <a href="https://html5up.net/forty">Forty</a> by
+              <a href="https://html5up.net">HTML5 UP</a>
+            </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
+
+    <script src="../../assets/js/jquery.min.js"></script>
+    <script src="../../assets/js/jquery.scrolly.min.js"></script>
+    <script src="../../assets/js/jquery.scrollex.min.js"></script>
+    <script src="../../assets/js/browser.min.js"></script>
+    <script src="../../assets/js/breakpoints.min.js"></script>
+    <script src="../../assets/js/util.js"></script>
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/menu-drawer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+    <script src="../../assets/js/code-highlight.js"></script>
+  </body>
+</html>
